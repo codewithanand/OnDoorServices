@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
+            $table->string('price');
+            $table->tinyInteger('service'); // 0 = Job, 1 = Service
             $table->timestamps();
         });
     }

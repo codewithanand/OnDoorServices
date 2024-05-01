@@ -10,7 +10,7 @@
                             with us?</h5>
                         <p class="pb-md-5 justify-content-center align-items-center text-center">Take advantage of this
                             exceptional opportunity to become a partner in your local area.</p>
-                        <form class="px-md-2 text-dark" action={{url('/register/partner')}} method="post" enctype="multipart/form-data">
+                        <form class="px-md-2 text-dark" action={{url('/partner/register')}} method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-4">

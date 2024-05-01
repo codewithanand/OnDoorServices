@@ -74,6 +74,26 @@
     </div>
     <!-- Feature End -->
 
+    @php
+        $categories = App\Models\Category::all();
+    @endphp
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5 px-lg-5">
+            <p class="section-title text-secondary justify-content-center"><span></span>Testimonial<span></span></p>
+            <h1 class="text-center mb-5">What Say Our Clients!</h1>
+            <div class="owl-carousel testimonial-carousel">
+                @foreach ($categories as $item)
+                    <div class="testimonial-item bg-light rounded my-4">
+                        <a href="{{url('/category/'.$item->id)}}" class="border rounded">
+                            <img src="{{asset('uploads/category/'.$item->image)}}" alt="">
+                            <h3 class="h3 text-center my-2">{{$item->title}}</h3>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
     <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container py-5 px-lg-5">

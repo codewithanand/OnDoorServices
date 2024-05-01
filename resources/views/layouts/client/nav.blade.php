@@ -9,9 +9,9 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto py-0">
             <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
+            <a href="{{url('/services')}}" class="nav-item nav-link">Services</a>
+            <a href="{{url('/jobs')}}" class="nav-item nav-link">Jobs</a>
             <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="service.html" class="nav-item nav-link">Service</a>
-            <a href="project.html" class="nav-item nav-link">Blog </a>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
         </div>
         <div class="navbar-nav">
@@ -37,7 +37,7 @@
                     @endphp
                 @endif
                 @if (auth()->user()->role == '2' && is_null($service_partners))
-                    <a href="{{ url('/register/partner') }}" class="nav-item nav-link ">Collaborate</a>
+                    <a href="{{ url('/partner/register') }}" class="nav-item nav-link ">Collaborate</a>
                 @endif
                 @if (auth()->user()->role == '2' && $services && count($services) == 0)
                     <a href="{{ url('/partner/services/add') }}" class="nav-item nav-link ">Add Service</a>

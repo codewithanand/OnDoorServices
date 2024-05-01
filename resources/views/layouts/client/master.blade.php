@@ -31,6 +31,8 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('client/css/style.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 
 <body>
@@ -72,6 +74,8 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('client/js/main.js') }}"></script>
+
+    @yield('scripts')
 </body>
 
 </html>

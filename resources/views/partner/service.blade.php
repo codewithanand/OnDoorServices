@@ -22,6 +22,10 @@
                                 <input class="form-control" type="file" name="image">
                             </div>
                             <div class="form-group mb-3">
+                                <label for="">Price</label>
+                                <input class="form-control" type="text" name="price">
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="">Category</label>
                                 <select name="category_id" class="form-control">
                                     @foreach ($categories as $category)
@@ -29,6 +33,17 @@
                                     @endforeach
 
                                 </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="">Choose</label>
+                                <div>
+                                    <input type="checkbox" name="job">
+                                    <label for="job">Job</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="service">
+                                    <label for="service">Service</label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Add</button>
@@ -46,13 +61,13 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     @foreach ($services as $service)
-                                        <label class="form-control">{{ $service->title }}</label>
+                                        <label class="form-control mb-3">{{ $service->title }}</label>
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row">
                                 <div class="col-md-12">
-                                    <a href="{{ url('/') }}" class="btn btn-success">Finish</a>
+                                    <a href="{{ url('/partner/dashboard') }}" class="btn btn-success">Finish</a>
                                 </div>
                             </div>
                         @endif
