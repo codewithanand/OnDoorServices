@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_requests', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('contact');
-            $table->text('address');
-            $table->unsignedBigInteger('service_id');
-            $table->tinyInteger('status')->default(0); // 0 = Not Complete, 1 = Complete
+            $table->integer('district_code');
+            $table->integer('city_code');
+            $table->string('city_name');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_requests');
+        Schema::dropIfExists('cities');
     }
 };

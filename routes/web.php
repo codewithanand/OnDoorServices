@@ -10,7 +10,10 @@ Route::get('/service/{id}', [App\Http\Controllers\Client\ServiceController::clas
 Route::get('/services', [App\Http\Controllers\Client\ServiceController::class, 'services']);
 Route::get('/jobs', [App\Http\Controllers\Client\ServiceController::class, 'jobs']);
 
-Route::post('/service/request/{id}', [App\Http\Controllers\Client\ServiceRequestController::class, 'store']);
+Route::get('/service/request/call', [App\Http\Controllers\Client\CallRequestController::class, 'index']);
+Route::post('/service/request/call', [App\Http\Controllers\Client\CallRequestController::class, 'store']);
+
+
 
 
 Auth::routes();
@@ -18,7 +21,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [App\Http\Controllers\Client\UserController::class, 'index']);
     
-    Route::get('/job/apply/{id}', [App\Http\Controllers\Client\JobRequestController::class, 'store']);
+    Route::get('/job/apply/{id}', [App\Http\Controllers\Client\JobRequestController::class, 'index']);
 });
 
 Route::prefix("partner")->middleware(['auth'])->group(function () {
@@ -44,5 +47,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/category/store', [App\Http\Controllers\Admin\CategoryController::class, 'store']);
     Route::post('/category/{id}/update', [App\Http\Controllers\Admin\CategoryController::class, 'update']);
     Route::get('/category/{id}/delete', [App\Http\Controllers\Admin\CategoryController::class, 'destroy']);
+
+    Route::get('/service', [App\Http\Controllers\Admin\ServiceController::class, 'index']);
+    Route::post('/service/store', [App\Http\Controllers\Admin\ServiceController::class, 'store']);
 
 });

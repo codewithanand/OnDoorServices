@@ -32,6 +32,12 @@
             <span>Category</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin/service')}}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Service</span></a>
+    </li>
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"

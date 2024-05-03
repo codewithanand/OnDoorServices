@@ -13,8 +13,8 @@
                         ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit
                         justo
                         amet ipsum vero ipsum clita lorem</p>
-                    <a href="" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Read
-                        More</a>
+                    <a href="{{url('/register')}}" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started
+                        </a>
                     <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact
                         Us</a>
                 </div>
@@ -28,71 +28,38 @@
 @endsection
 
 @section('loading')
- <!-- Spinner Start -->
- <div id="spinner"
- class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
- <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-     <span class="sr-only">Loading...</span>
- </div>
-</div>
-<!-- Spinner End -->
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
 @endsection
 
 
 @section('content')
-
-     <!-- Feature Start -->
-     <div class="container-fluid py-5">
-        <div class="container-fluid py-5">
-            <div class="row g-4">
-                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="feature-item bg-light rounded text-center p-4">
-                        <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
-                        <h5 class="mb-3">Home & Office</h5>
-                        <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet
-                            diam sed stet lorem.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="feature-item bg-light rounded text-center p-4">
-                        <i class="fa fa-3x fa-search text-primary mb-4"></i>
-                        <h5 class="mb-3">Unisex Salon</h5>
-                        <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet
-                            diam sed stet lorem.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="feature-item bg-light rounded text-center p-4">
-                        <i class="fa fa-3x fa-laptop-code text-primary mb-4"></i>
-                        <h5 class="mb-3">Recuritment</h5>
-                        <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet
-                            diam sed stet lorem.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Feature End -->
-
     @php
         $categories = App\Models\Category::all();
     @endphp
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5 px-lg-5">
-            <p class="section-title text-secondary justify-content-center"><span></span>Testimonial<span></span></p>
-            <h1 class="text-center mb-5">What Say Our Clients!</h1>
+            <p class="section-title text-secondary justify-content-center"><span></span>Categories<span></span></p>
             <div class="owl-carousel testimonial-carousel">
                 @foreach ($categories as $item)
                     <div class="testimonial-item bg-light rounded my-4">
-                        <a href="{{url('/category/'.$item->id)}}" class="border rounded">
-                            <img src="{{asset('uploads/category/'.$item->image)}}" alt="">
-                            <h3 class="h3 text-center my-2">{{$item->title}}</h3>
+                        <a href="{{ url('/category/' . $item->id) }}" class="border rounded">
+                            <img src="{{ asset('uploads/category/' . $item->image) }}" alt="">
+                            <h3 class="h3 text-center my-2">{{ $item->title }}</h3>
                         </a>
                     </div>
                 @endforeach
             </div>
         </div>
     </div>
+
+    
 
     <!-- About Start -->
     <div class="container-fluid py-5">
@@ -149,7 +116,8 @@
     <div class="container-fluid py-5">
         <div class="container py-5 px-lg-5">
             <div class="wow fadeInUp" data-wow-delay="0.1s">
-                <p class="section-title text-secondary justify-content-center"><span></span>Our Services Category<span></span></p>
+                <p class="section-title text-secondary justify-content-center"><span></span>Our Services
+                    Category<span></span></p>
                 <h1 class="text-center mb-5">Recently Added Services</h1>
             </div>
             <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
@@ -162,27 +130,25 @@
                 </div>
             </div>
             <div class="row g-4 portfolio-container">
-                
-                    <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="rounded overflow-hidden">
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src=""
-                                    alt="">
-                                {{-- <div class="portfolio-overlay">
+
+                <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="rounded overflow-hidden">
+                        <div class="position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="" alt="">
+                            {{-- <div class="portfolio-overlay">
                                     <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-1.jpg"
                                         data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                                     <a class="btn btn-square btn-outline-light mx-1" href=""><i
                                             class="fa fa-link"></i></a>
                                 </div> --}}
-                            </div>
-                            <div class="bg-light p-4 justify-content-center">
-                                <h4 class="text-primary fw-medium mb-2"></h4>
-                                <p class="lh-base mb-0"></p>
-                                <a class="btn btn-primary " type="submit"
-                                    href="">Browse</a>
-                            </div>
+                        </div>
+                        <div class="bg-light p-4 justify-content-center">
+                            <h4 class="text-primary fw-medium mb-2"></h4>
+                            <p class="lh-base mb-0"></p>
+                            <a class="btn btn-primary " type="submit" href="">Browse</a>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

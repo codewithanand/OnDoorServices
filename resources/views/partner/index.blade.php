@@ -10,8 +10,6 @@
     <div class="container-fluid bg-primary pt-5">
         <div class="container py-5 mb-5">
             <h1 class="text-white">Dashboard</h1>
-
-
         </div>
     </div>
     <div class="container py-5">
@@ -45,8 +43,7 @@
                                 <div class="col-12 p-3 d-flex align-items-center justify-content-between gap-2">
                                     <span class="">{{ $service->title }}</span>
                                     <a class="text-danger"
-                                        href="{{ url('/partner/service/' . $service->id . '/delete') }}"><i
-                                            class="fas fa-trash"></i></a>
+                                        href="{{ url('/partner/service/' . $service->id . '/delete') }}"><i class="fas fa-trash"></i></a>
                                 </div>
                             @endforeach
                             <div class="mt-3 d-flex align-items-center justify-content-center">

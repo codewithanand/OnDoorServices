@@ -16,7 +16,7 @@
         </div>
         <div class="navbar-nav">
             @guest
-                <a href="{{ route('register') }}" class="btn rounded-pill py-2 px-4 ms-3 ">Get Started</a>
+                <a href="{{ url("/service/request/call") }}" class="btn rounded-pill py-2 px-4 ms-3 ">Request Call</a>
                 <a href="{{ route('login') }}" class="btn rounded-pill py-2 px-4 ms-3 ">Login</a>
             @else
                 @if (auth()->user()->role == '0')
