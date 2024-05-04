@@ -10,10 +10,8 @@
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 text-white">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-center">
-                            <h2 class=" align-items-center text-white">Sign Up</h2>
+                        <h2 class="text-center text-white mb-3">Sign Up</h2>
 
-                        </div>
                         {{-- Name Input  --}}
                         <div data-mdb-input-init class="form-outline mb-4">
                             <input type="text" id="name" class="form-control @error('name') is-invalid @enderror"
