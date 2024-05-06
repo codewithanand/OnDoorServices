@@ -79,9 +79,13 @@ class RegisterController extends Controller
         else if(auth()->user()->role=="2"){
             return redirect('/register/partner');
         }
-        else
+        else if(auth()->user()->role=="3")
         {
             return redirect("/seeker/register");
+        }
+        else
+        {
+            return redirect("/profile");
         }
     }
 }

@@ -5,12 +5,22 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\City;
+use App\Models\User;
 use App\Models\State;
 use App\Models\Seeker;
 
 
 class SeekerController extends Controller
 {
+
+    public function index(){
+        $user = User::find(auth()->user()->id);
+        $seeker = Seeker::where('user_id', auth()->user()->id)->first();
+        $cities = City::all();
+        return view ("user.seeker.dashboard", compact("cities", "seeker", "user"));
+    }
+
     public function register(){
         $seeker = Seeker::where('user_id', auth()->user()->id)->get();
         if(count($seeker) > 0){

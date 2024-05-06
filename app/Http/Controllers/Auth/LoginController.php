@@ -51,6 +51,10 @@ class LoginController extends Controller
             }
             return redirect('/register/partner');
         }
+        else if(auth()->user()->role=="3")
+        {
+            return redirect("/seeker/dashboard");
+        }
         else
         {
             return redirect("/profile");

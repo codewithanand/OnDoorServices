@@ -23,6 +23,8 @@ return new class extends Migration
             $table->integer('city_code');
             $table->integer('village_code');
             $table->text('address');
+            $table->integer('booked')->default(0); // 0 = Not Booked, 1 = Booked
+            $table->integer('completed')->default(0); // 0 = Not completed, 1 = Completed
             $table->timestamps();
         });
     }

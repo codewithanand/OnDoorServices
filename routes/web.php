@@ -20,6 +20,8 @@ Route::post('/service/request/call', [App\Http\Controllers\Client\CallRequestCon
 Route::middleware(['auth'])->group(function () {
     Route::get('/seeker/register', [App\Http\Controllers\Client\SeekerController::class, 'register']);
     Route::post('/seeker/register', [App\Http\Controllers\Client\SeekerController::class, 'store']);
+    Route::get('/seeker/dashboard', [App\Http\Controllers\Client\SeekerController::class, 'index']);
+
 
 
     Route::get('/profile', [App\Http\Controllers\Client\UserController::class, 'index']);

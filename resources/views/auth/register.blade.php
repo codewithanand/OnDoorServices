@@ -59,7 +59,7 @@
                         <div data-mdb-input-init class="form-outline mb-3">
                             <label class="form-label" for="user-type">Select User Type</label>
                             <select class="form-select" name="role">
-                                <option value="0">JOB Seeker</option>
+                                <option value="3">JOB Seeker</option>
                                 <option value="2">JOB Provider</option>
                             </select>
                         </div>
