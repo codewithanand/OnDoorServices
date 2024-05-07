@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
+
+    public function booked_appointments(){
+        return $this->hasMany(Appointment::class, 'appointment_id', 'id');
+    }
 }

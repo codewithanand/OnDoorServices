@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    public function getCityByName(){
-        $cities = City::all();
+    public function getCityByName(Request $request){
+        $cityName = $request->cityName;
+        $cities = City::where('city_name', 'like', '%'.$cityName.'%')->get();
+        if(count($cities) < 1){
+            $cities = City::all();
+        }
         return response()->json($cities);
     }
 }

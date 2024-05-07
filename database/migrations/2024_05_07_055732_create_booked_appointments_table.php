@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('booked_appointments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->string('title');
-            $table->text('description');
-            $table->String('image')->nullable();
+            $table->unsignedBigInteger('seeker_id');
+            $table->unsignedBigInteger('appointment_id');
+            $table->date('booking_date');
+            $table->date('completed_date')->nullable();
+            $table->integer('status')->default(0); // 0 = Not complete, 1 = Complete
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('booked_appointments');
     }
 };

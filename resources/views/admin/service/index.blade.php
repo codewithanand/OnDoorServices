@@ -125,6 +125,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Title</th>
+                            <th>Category</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
@@ -134,6 +135,8 @@
                             <tr>
                                 <td>{{ $service->id }}</td>
                                 <td>{{ $service->title }}</td>
+                                <td>{{ $service->category->title }}</td>
+
                                 <td><img src="{{ asset('uploads/service/' . $service->image . '') }}" alt=""
                                         height="32"></td>
                                 <td>

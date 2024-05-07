@@ -37,19 +37,19 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="card card-body">
+                    <div class="card card-body mb-3">
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="col-md-4">
                                 <select name="city" class="form-control" id="cityDropDown">
 
                                 </select>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="col-md-4">
                                 <select name="category" class="form-control" id="categoryDropDown">
                                     <option value="0">Select a category</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="col-md-4">
                                 <select name="service" class="form-control" id="serviceDropDown">
                                     <option value="0">Select a service</option>
                                 </select>
@@ -59,6 +59,32 @@
                             <div class="col-md-12">
                                 <div id="customerDataTable">
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="h3 text-primary mb-3">Booked Appointments</h3>
+                                @foreach ($booked_appointments as $ba)
+                                    <div class="border-bottom p-3 d-flex justify-content-between align-items-center">
+                                        <span>{{ $ba->appointment->name }}</span>
+                                        <span><strong>Booking Date: </strong>{{ $ba->booking_date }}</span>
+                                        @if ($ba->status == '1')
+                                            <span>
+                                                <strong>Completed Date: </strong>{{ $ba->completed_date }}
+                                            </span>
+                                        @endif
+                                        @if ($ba->status == '0')
+                                            <a href="{{url('/seeker/booking/'.$ba->id.'/complete')}}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                        @else
+                                            <span class="badge bg-success">Complete</span>
+                                        @endif
+                                    </div>
+                                @endforeach
+                                <div class="p-3 d-flex justify-content-center align-items-center">
+                                    {{ $booked_appointments->links() }}
                                 </div>
                             </div>
                         </div>
@@ -119,9 +145,14 @@
             $("#cityDropDown").select2({
                 placeholder: "Select a city",
                 ajax: {
-                    url: "http://localhost:8000/api/cities",
+                    url: "http://localhost:8000/api/city",
                     dataType: 'json',
                     delay: 250,
+                    data: function(params) {
+                        return {
+                            cityName: params.term
+                        };
+                    },
                     processResults: function(data) {
                         return {
                             results: $.map(data, function(item) {
@@ -136,13 +167,6 @@
                 }
             });
 
-            $('.view-btn').each(function() {
-                $(this).click(function() {
-                    populateAppointmentDetails($(this).data('customer-id'));
-
-                });
-            });
-
             function populateCustomerDataTable(data) {
                 $('#customerDataTable').html('');
                 $.each(data, function() {
@@ -152,27 +176,30 @@
                             <span>${this.mobile}</span>
                             <div>
                                 <button type="button" class="btn btn-info view-btn" data-customer-id="${this.id}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> View</button>
-                                <a href="#" class="btn btn-success"><i class="fas fa-check"></i> Book</a>
+                                <a href="{{ url('/seeker/appointment/${this.id}/book') }}" class="btn btn-success"><i class="fas fa-check"></i> Book</a>
                             </div>
                         </div>
                     `);
                 });
+                $('.view-btn').each(function() {
+                    $(this).click(function() {
+                        populateAppointmentDetails($(this).data('customer-id'));
+                    });
+                });
             }
 
+            function populateAppointmentDetails(appointmentId) {
+                $('#modalCustomerName').text('');
+                $('#modalCustomerMobile').text('');
+                $('#modalCustomerProblem').text('');
 
-            function populateAppointmentDetails($appointmentId) {
-                console.log($appointmentId)
-                $('#modalCustomerName').html('');
-                $('#modalCustomerMobile').html('');
-                $('#modalCustomerProblem').html('');
                 $.ajax({
-                    url: "http://localhost:8000/api/appointments/" + $appointmentId,
+                    url: "http://localhost:8000/api/appointments/" + appointmentId,
                     dataType: 'json',
                     success: function(data) {
-                        console.log(data)
-                        $('#modalCustomerName').append(data.name);
-                        $('#modalCustomerMobile').append(data.mobile);
-                        $('#modalCustomerProblem').append(data.problem);
+                        $('#modalCustomerName').text(data.name);
+                        $('#modalCustomerMobile').text(data.mobile);
+                        $('#modalCustomerProblem').text(data.problem);
                         $('#exampleModal').modal('show');
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -180,7 +207,6 @@
                     }
                 });
             }
-
         });
     </script>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\BookedAppointment;
 use Illuminate\Http\Request;
 
 use App\Models\City;
@@ -18,7 +20,8 @@ class SeekerController extends Controller
         $user = User::find(auth()->user()->id);
         $seeker = Seeker::where('user_id', auth()->user()->id)->first();
         $cities = City::all();
-        return view ("user.seeker.dashboard", compact("cities", "seeker", "user"));
+        $booked_appointments = BookedAppointment::where('seeker_id', auth()->user()->id)->orderBy('status')->simplePaginate(5);
+        return view ("user.seeker.dashboard", compact("cities", "seeker", "user", 'booked_appointments'));
     }
 
     public function register(){

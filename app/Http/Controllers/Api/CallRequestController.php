@@ -8,13 +8,15 @@ use Illuminate\Http\Request;
 
 class CallRequestController extends Controller
 {
-    public function getCallRequestByCityCode($cityCode){
-        $callRequests = Appointment::where('city_code', $cityCode)->get();
+    public function getCallRequestByCityCode(Request $request){
+        $cityCode = $request->cityCode;
+        $callRequests = Appointment::where('city_code', $cityCode)->where('booked', 0)->get();
         return response()->json($callRequests);
     }
 
-    public function getCallRequestById($id){
-        $callRequests = Appointment::find($id);
+    public function getCallRequestById(Request $request){
+        $appointmentId = $request->id;
+        $callRequests = Appointment::find($appointmentId);
         return response()->json($callRequests);
     }
 }

@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/seeker/register', [App\Http\Controllers\Client\SeekerController::class, 'register']);
     Route::post('/seeker/register', [App\Http\Controllers\Client\SeekerController::class, 'store']);
     Route::get('/seeker/dashboard', [App\Http\Controllers\Client\SeekerController::class, 'index']);
+    Route::get('/seeker/appointment/{appointmentId}/book', [App\Http\Controllers\Client\BookedAppointmentController::class, 'store']);
+    Route::get('/seeker/booking/{bookingId}/complete', [App\Http\Controllers\Client\BookedAppointmentController::class, 'complete']);
 
 
 
