@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 use App\Models\Category;
 
@@ -18,6 +19,7 @@ class CategoryController extends Controller
     public function store(Request $request){
         $category = new Category;
         $category->title = $request->title;
+        $category->slug = Str::slug($request->title);
         $category->description = $request->description;
         if($request->hasfile('image')){
             $file = $request->file('image');
@@ -33,6 +35,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         if($category){
             $category->title = $request->title;
+            $category->slug = Str::slug($request->title);
             $category->description = $request->description;
             if($request->hasfile('image')){
                 $destination = 'uploads/category/'.$category->image;

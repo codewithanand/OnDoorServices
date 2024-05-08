@@ -5,6 +5,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index']);
 
+Route::get('/category/{slug}', [App\Http\Controllers\Client\CategoryController::class, 'index']);
+
 Route::get('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'index']);
 Route::post('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'store']);
 

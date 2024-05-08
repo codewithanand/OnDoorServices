@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
+use App\Models\Category;
 use App\Models\Service;
 
 class ServiceController extends Controller
@@ -20,6 +21,7 @@ class ServiceController extends Controller
         $service = new Service;
         $service->category_id = $request->category_id;
         $service->title = $request->title;
+        $service->slug = Str::slug($request->title);
         $service->description = $request->description;
         if($request->hasfile('image')){
             $file = $request->file('image');
