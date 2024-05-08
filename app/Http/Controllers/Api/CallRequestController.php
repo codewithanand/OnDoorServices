@@ -10,13 +10,13 @@ class CallRequestController extends Controller
 {
     public function getCallRequestByCityCode(Request $request){
         $cityCode = $request->cityCode;
-        $callRequests = Appointment::where('city_code', $cityCode)->where('booked', 0)->get();
+        $callRequests = Appointment::where('city_code', $cityCode)->where('booked', 0)->with('service')->get();
         return response()->json($callRequests);
     }
 
     public function getCallRequestById(Request $request){
         $appointmentId = $request->id;
-        $callRequests = Appointment::find($appointmentId);
+        $callRequests = Appointment::where('id', $appointmentId)->with('service')->first();
         return response()->json($callRequests);
     }
 }

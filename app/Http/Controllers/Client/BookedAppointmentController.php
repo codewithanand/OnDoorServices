@@ -39,4 +39,20 @@ class BookedAppointmentController extends Controller
             return redirect()->back()->with("error", "Incorrect booking id");
         }
     }
+
+    public function revert($bookingId){
+        $booked_appointment = BookedAppointment::find($bookingId);
+        if($booked_appointment){
+            $appointment = Appointment::find($booked_appointment->appointment_id);
+            $appointment->booked = 0;
+            $appointment->update();
+
+
+            $booked_appointment->delete();
+            return redirect()->back()->with("success", "Job restored successfully");
+        }
+        else{
+            return redirect()->back()->with("error", "Incorrect booking id");
+        }
+    }
 }
