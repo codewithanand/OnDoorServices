@@ -8,52 +8,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto py-0">
-            <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-            <a href="{{url('/services')}}" class="nav-item nav-link">Services</a>
-            <a href="{{url('/jobs')}}" class="nav-item nav-link">Jobs</a>
+            <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
+            <a href="{{ url('/services') }}" class="nav-item nav-link">Services</a>
+            <a href="{{ url('/jobs') }}" class="nav-item nav-link">Jobs</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
         </div>
         <div class="navbar-nav">
             @guest
-                <a href="{{ url("/service/request/call") }}" class="btn rounded-pill py-2 px-4 ms-3 ">Request Call</a>
+                <a href="{{ url('/service/request/call') }}" class="btn rounded-pill py-2 px-4 ms-3 ">Request Call</a>
                 <a href="{{ route('login') }}" class="btn rounded-pill py-2 px-4 ms-3 ">Login</a>
             @else
-                @if (auth()->user()->role == '0')
-                    <a href="{{ url('/cart') }}" class="nav-item nav-link"><i class="fas fa-shopping-cart"></i> Cart</a>
-                @endif
-                @php
-                    $service_partners = [];
-                    $services = [];
-                @endphp
-                @if (auth()->user()->role == '2')
-                    @php
-                        $service_partners = App\Models\ServicePartner::where('user_id', auth()->user()->id)->first();
-                    @endphp
-                @endif
-                @if (auth()->user()->role == '2' && $service_partners)
-                    @php
-                        $services = App\Models\Service::where('service_partner_id', $service_partners->id)->get();
-                    @endphp
-                @endif
-                @if (auth()->user()->role == '2' && is_null($service_partners))
-                    <a href="{{ url('/partner/register') }}" class="nav-item nav-link ">Collaborate</a>
-                @endif
-                @if (auth()->user()->role == '2' && $services && count($services) == 0)
-                    <a href="{{ url('/partner/services/add') }}" class="nav-item nav-link ">Add Service</a>
-                @endif
                 <div class="dropdown">
-                    <a class="nav-item nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-item nav-link {{ Request::is('freelancer/dashboard') ? 'active' : '' }}" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
+
                     <ul class="dropdown-menu">
-                        @if (auth()->user()->role == '2')
-                            <li><a class="dropdown-item" href="{{ url('/partner/dashboard') }}">Dashboard</a></li>
-                        @elseif(auth()->user()->role == '1')
-                            <li><a class="dropdown-item" href="{{ url('/admin/dashboard') }}">Dashboard</a></li>
-                        @else
-                            <li><a class="dropdown-item" href="{{ url('/profile') }}">Profile</a></li>
-                            <li><a class="dropdown-item" href="">Order</a></li>
+                        @if (auth()->user()->role == 0)
+                            <li><a class="dropdown-item" href="{{ url('/freelancer/dashboard') }}">Dashboard</a></li>
                         @endif
                         <li><a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

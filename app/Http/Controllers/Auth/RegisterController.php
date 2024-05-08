@@ -85,7 +85,7 @@ class RegisterController extends Controller
         }
         else
         {
-            return redirect("/profile");
+            return redirect("/freelancer/register");
         }
     }
 }

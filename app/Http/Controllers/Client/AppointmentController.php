@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Models\Appointment;
-use Exception;
 use Illuminate\Http\Request;
 
+use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\State;
 
-class CallRequestController extends Controller
+class AppointmentController extends Controller
 {
     public function index(){
         $categories = Category::all();
         $states = State::all();
-        return view ("user.call.index", compact('states', 'categories'));
+        return view ("home.call.index", compact('states', 'categories'));
     }
 
     public function store(Request $request){

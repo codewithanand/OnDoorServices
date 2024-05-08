@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Client;
+namespace App\Http\Controllers\Freelancer;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 use App\Models\Appointment;
 use App\Models\BookedAppointment;
-use Illuminate\Http\Request;
 
 class BookedAppointmentController extends Controller
 {
@@ -16,7 +17,7 @@ class BookedAppointmentController extends Controller
 
         $bookedAppointment = new BookedAppointment;
         $bookedAppointment->appointment_id = $appointmentId;
-        $bookedAppointment->seeker_id = auth()->user()->id;
+        $bookedAppointment->freelancer_id = auth()->user()->id;
         $bookedAppointment->booking_date = date("Y-m-d");
         $bookedAppointment->save();
 

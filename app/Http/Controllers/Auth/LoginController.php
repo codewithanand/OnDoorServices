@@ -57,7 +57,7 @@ class LoginController extends Controller
         }
         else
         {
-            return redirect("/profile");
+            return redirect("/freelancer/register");
         }
     }
 }

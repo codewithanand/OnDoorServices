@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card card-body">
-                        <img src="{{ asset('uploads/seeker/' . $seeker->image) }}" alt=""
+                        <img src="{{ asset('uploads/freelancer/' . $freelancer->image) }}" alt=""
                             class="img-fluid rounded-pill mb-3">
                         <h3 class="h3 text-primary text-center">{{ $user->name }}</h3>
                         <p class="lead mb-3 text-center">{{ $user->email }}</p>
@@ -93,9 +93,9 @@
                                             <div class="col-md-3">
                                             </div>
                                             <div class="col-md-3">
-                                                <a href="{{ url('/seeker/booking/' . $ba->id . '/revert') }}"
+                                                <a href="{{ url('/freelancer/booking/' . $ba->id . '/revert') }}"
                                                     class="btn btn-danger"><i class="fas fa-history"></i></a>
-                                                <a href="{{ url('/seeker/booking/' . $ba->id . '/complete') }}"
+                                                <a href="{{ url('/freelancer/booking/' . $ba->id . '/complete') }}"
                                                     class="btn btn-success"><i class="fas fa-check"></i></a>
                                             </div>
                                         @endif
@@ -199,7 +199,7 @@
                             <span>${this.service.title}</span>
                             <div>
                                 <button type="button" class="btn btn-info view-btn" data-customer-id="${this.id}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> View</button>
-                                <a href="{{ url('/seeker/appointment/${this.id}/book') }}" class="btn btn-success"><i class="fas fa-check"></i> Book</a>
+                                <a href="{{ url('/freelancer/appointment/${this.id}/book') }}" class="btn btn-success"><i class="fas fa-check"></i> Book</a>
                             </div>
                         </div>
                     `);

@@ -5,49 +5,21 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index']);
 
-Route::get('/category/{id}', [App\Http\Controllers\Client\CategoryController::class, 'index']);
-Route::get('/service/{id}', [App\Http\Controllers\Client\ServiceController::class, 'index']);
-
-Route::get('/services', [App\Http\Controllers\Client\ServiceController::class, 'services']);
-Route::get('/jobs', [App\Http\Controllers\Client\ServiceController::class, 'jobs']);
-
-Route::get('/service/request/call', [App\Http\Controllers\Client\CallRequestController::class, 'index']);
-Route::post('/service/request/call', [App\Http\Controllers\Client\CallRequestController::class, 'store']);
+Route::get('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'index']);
+Route::post('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'store']);
 
 
 
-// USER ROUTES
-Route::middleware(['auth'])->group(function () {
-    Route::get('/seeker/register', [App\Http\Controllers\Client\SeekerController::class, 'register']);
-    Route::post('/seeker/register', [App\Http\Controllers\Client\SeekerController::class, 'store']);
-    Route::get('/seeker/dashboard', [App\Http\Controllers\Client\SeekerController::class, 'index']);
-    Route::get('/seeker/appointment/{appointmentId}/book', [App\Http\Controllers\Client\BookedAppointmentController::class, 'store']);
-    Route::get('/seeker/booking/{bookingId}/complete', [App\Http\Controllers\Client\BookedAppointmentController::class, 'complete']);
-    Route::get('/seeker/booking/{bookingId}/revert', [App\Http\Controllers\Client\BookedAppointmentController::class, 'revert']);
-
-
-
-
-    Route::get('/profile', [App\Http\Controllers\Client\UserController::class, 'index']);
-    
-    Route::get('/job/apply/{id}', [App\Http\Controllers\Client\JobRequestController::class, 'index']);
+// Freelance Routes
+Route::prefix('freelancer')->middleware(['auth'])->group(function () {
+    Route::get('/register', [App\Http\Controllers\Freelancer\FreelancerController::class, 'register']);
+    Route::post('/register', [App\Http\Controllers\Freelancer\FreelancerController::class, 'store']);
+    Route::get('/dashboard', [App\Http\Controllers\Freelancer\FreelancerController::class, 'index']);
+    Route::get('/appointment/{appointmentId}/book', [App\Http\Controllers\Freelancer\BookedAppointmentController::class, 'store']);
+    Route::get('/booking/{bookingId}/complete', [App\Http\Controllers\Freelancer\BookedAppointmentController::class, 'complete']);
+    Route::get('/booking/{bookingId}/revert', [App\Http\Controllers\Freelancer\BookedAppointmentController::class, 'revert']);
 });
 
-// PARTNER ROUTES
-Route::prefix("partner")->middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Partner\PartnerController::class, 'index']);
-
-    Route::get('/register', [App\Http\Controllers\Partner\ServicePartnerController::class, 'index']);
-    Route::post('/register', [App\Http\Controllers\Partner\ServicePartnerController::class, 'store']);
-    
-    Route::get('/services/add', [App\Http\Controllers\Partner\ServiceController::class, 'index']);
-    Route::post('/{id}/services/add', [App\Http\Controllers\Partner\ServiceController::class, 'store']);
-
-    Route::get('/service/{id}/delete', [App\Http\Controllers\Partner\ServiceController::class, 'destroy']);
-    Route::get('/service/{id}/delete', [App\Http\Controllers\Partner\ServiceController::class, 'destroy']);
-
-    Route::get('/service/request/check/{id}', [App\Http\Controllers\Partner\ServiceRequestController::class, 'update']);
-});
 
 
 // ADMIN ROUTES

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('booked_appointments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('seeker_id');
+            $table->unsignedBigInteger('freelancer_id');
             $table->unsignedBigInteger('appointment_id');
             $table->date('booking_date');
             $table->date('completed_date')->nullable();
