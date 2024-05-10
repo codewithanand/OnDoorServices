@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Category;
 use App\Models\Appointment;
+use App\Models\FreelancerService;
+
 
 
 class Service extends Model
@@ -19,5 +21,9 @@ class Service extends Model
 
     public function appointments(){
         return $this->hasMany(Appointment::class, 'service_id', 'id');
+    }
+
+    public function freelancer_services(){
+        $this->belongsTo(FreelancerService::class, 'service_id', 'id');
     }
 }

@@ -85,57 +85,82 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="h3 text-secondary mb-3">Contact Details</h3>
-                                    <div class="form-floating">
-                                        <input class="form-control" type="text" name="mobile"
-                                            placeholder="Mobile Number">
-                                        <label for="contact">Mobile Number</label>
-                                    </div>
-                                    <div class="form-floating mt-3">
-                                        <input class="form-control" type="text" name="altphone" placeholder="Alternate Phone Number">
-                                        <label for="altphone">Alternate Phone Number</label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group mt-3">
-                                                <label for="state">State</label>
-                                                <select name="state_code" id="state" class="form-control">
-                                                    @foreach ($states as $state)
-                                                        <option value="{{ $state->state_code }}">{{ $state->state_name }}
-                                                        </option>
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="h3 text-secondary mb-3">Service Details</h3>
+                                            <div class="form-group">
+                                                <label for="category_id">Select a Category</label>
+                                                <select class="form-control" name="category_id" id="categoryDropdown">
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6">
                                             <div class="form-group mt-3">
-                                                <label for="district">District</label>
-                                                <select name="district_code" id="district" class="form-control">
-                                                </select>
+                                                <label for="category_id">Select Services</label>
+                                                <select class="form-control" name="service_id[]" id="serviceDropdown" multiple></select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group mt-3">
-                                                <label for="city">City</label>
-                                                <select name="city_code" id="city" class="form-control">
-                                                </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="h3 text-secondary mb-3">Contact Details</h3>
+                                            <div class="form-floating">
+                                                <input class="form-control" type="text" name="mobile"
+                                                    placeholder="Mobile Number">
+                                                <label for="contact">Mobile Number</label>
+                                            </div>
+                                            <div class="form-floating mt-3">
+                                                <input class="form-control" type="text" name="altphone" placeholder="Alternate Phone Number">
+                                                <label for="altphone">Alternate Phone Number</label>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group mt-3">
+                                                        <label for="state">State</label>
+                                                        <select name="state_code" id="state" class="form-control">
+                                                            @foreach ($states as $state)
+                                                                <option value="{{ $state->state_code }}">{{ $state->state_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group mt-3">
+                                                        <label for="district">District</label>
+                                                        <select name="district_code" id="district" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group mt-3">
+                                                        <label for="city">City</label>
+                                                        <select name="city_code" id="city" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group mt-3">
+                                                        <label for="village">Village</label>
+                                                        <select name="village_code" id="village" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mt-3">
+                                                <textarea class="form-control" type="text" name="address" placeholder="Address" style="height: 100px;"></textarea>
+                                                <label for="address">Address</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="form-group mt-3">
-                                                <label for="village">Village</label>
-                                                <select name="village_code" id="village" class="form-control">
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-floating mt-3">
-                                        <textarea class="form-control" type="text" name="address" placeholder="Address" style="height: 100px;"></textarea>
-                                        <label for="address">Address</label>
                                     </div>
                                 </div>
                             </div>
@@ -181,8 +206,8 @@
                 }
             }
 
-            var category = $('#category');
-            var service = $('#service');
+            var category = $('#categoryDropdown');
+            var service = $('#serviceDropdown');
 
             populateServices(category.val())
 

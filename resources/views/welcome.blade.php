@@ -1,5 +1,9 @@
 @extends('layouts.client.master')
 
+@section('styles')
+    
+@endsection
+
 @section('hero')
     <div class="container-fluid bg-primary hero-header">
         <div class="container-fluid px-lg-5">
@@ -44,12 +48,13 @@
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <p class="section-title text-secondary justify-content-center mb-5"><span></span>Categories<span></span></p>
-            <div class="owl-carousel">
+            <div class="owl-carousel p-3">
                 @foreach ($categories as $category)
-                    <a class="card card-body bg-white shadow-sm text-dark p-3 mx-2 my-3" href="{{url('/category/'.$category->slug)}}">
-                        <div class="d-flex align-items-center justify-content-center flex-col p-3">
+                    <a class="category-container p-3 mx-2 my-3" href="{{url('/category/'.$category->slug)}}">
+                        <img src="{{asset('uploads/category/'.$category->image)}}" />
+                        <h3>
                             {{$category->title}}
-                        </div>
+                        </h3>
                     </a>
                 @endforeach
             </div>

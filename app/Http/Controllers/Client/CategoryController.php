@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Models\Service;
+use App\Models\FreelancerService;
+
 
 class CategoryController extends Controller
 {
@@ -15,4 +17,6 @@ class CategoryController extends Controller
         $services = Service::where('category_id', $category->id)->simplePaginate(8);
         return view ("home.category.index", compact("category", "services"));
     }
+
+    
 }

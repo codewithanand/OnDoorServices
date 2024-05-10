@@ -6,10 +6,13 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index']);
 
 Route::get('/category/{slug}', [App\Http\Controllers\Client\CategoryController::class, 'index']);
+Route::get('/services', [App\Http\Controllers\Client\ServiceController::class, 'index']);
+Route::get('/services/{category_slug}/{service_slug}', [App\Http\Controllers\Client\ServiceController::class, 'services']);
 
 Route::get('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'index']);
 Route::post('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'store']);
 
+Route::get('/service/request/freelancer', [App\Http\Controllers\Client\AppointmentController::class, 'freelancer']);
 
 
 // Freelance Routes

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Freelancer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\FreelancerReview;
+use App\Models\FreelancerService;
 use Illuminate\Http\Request;
 
 use App\Models\City;
@@ -16,18 +19,24 @@ class FreelancerController extends Controller
     public function index(){
         $user = User::find(auth()->user()->id);
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
-        $cities = City::all();
-        $booked_appointments = BookedAppointment::where('freelancer_id', auth()->user()->id)->orderBy('status')->simplePaginate(5);
-        return view ("freelancer.dashboard", compact("cities", "freelancer", "user", 'booked_appointments'));
+        if($freelancer){
+            $cities = City::all();
+            $booked_appointments = BookedAppointment::where('freelancer_id', auth()->user()->id)->orderBy('status')->simplePaginate(5);
+            return view ("freelancer.dashboard", compact("cities", "freelancer", "user", 'booked_appointments'));
+        }
+        else{
+            return redirect("/freelancer/register");
+        }
     }
 
     public function register(){
+        $categories = Category::all();
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->get();
         if(count($freelancer) > 0){
             return redirect("/freelancer/dashboard");
         }
         $states = State::all();
-        return view("freelancer.register", compact("states"));
+        return view("freelancer.register", compact("states", "categories"));
     }
 
     public function store(Request $request){
@@ -64,6 +73,23 @@ class FreelancerController extends Controller
         $freelancer->village_code = $request->village_code;
         $freelancer->address = $request->address;
         $freelancer->save();
+
+        // Reviews
+        $review = new FreelancerReview;
+        $review->freelancer_id = $freelancer->id;
+        $review->stars = 4;
+        $review->comment = "Good";
+        $review->customer_name = "Anonymous";
+        $review->save();
+
+        // Services
+        $services = $request->service_id;
+        foreach($services as $service){
+            $freelancer_service = new FreelancerService;
+            $freelancer_service->service_id = $service;
+            $freelancer_service->freelancer_id = $freelancer->id;
+            $freelancer_service->save();
+        }
 
         return redirect ('/freelancer/dashboard');
     }

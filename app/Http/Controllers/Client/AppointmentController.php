@@ -38,4 +38,8 @@ class AppointmentController extends Controller
 
         }
     }
+
+    public function freelancer(){
+        return view ("home.call.freelancer");
+    }
 }
