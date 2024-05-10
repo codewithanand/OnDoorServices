@@ -47,6 +47,7 @@
                                         <th>Name</th>
                                         <th>Contact</th>
                                         <th>Stars</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,7 +65,9 @@
                                                         @endif
                                                     @endfor
                                                 </td>
-                                                
+                                                <td>
+                                                    <a href="#" class="btn btn-dark">Book</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif

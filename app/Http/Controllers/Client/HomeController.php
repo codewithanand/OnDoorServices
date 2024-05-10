@@ -13,4 +13,12 @@ class HomeController extends Controller
         $categories = Category::all();
         return view ("welcome", compact("categories"));
     }
+
+    public function about(){
+        return view ("home.about.index");
+    }
+
+    public function contact(){
+        return view ("home.contact.index");
+    }
 }

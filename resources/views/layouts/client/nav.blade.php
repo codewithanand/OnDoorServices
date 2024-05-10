@@ -9,10 +9,9 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto py-0">
             <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/') ? 'active' : '' }}">Home</a>
-            <a href="{{ url('/services') }}" class="nav-item nav-link">Services</a>
-            <a href="{{ url('/jobs') }}" class="nav-item nav-link">Jobs</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="{{ url('/services') }}" class="nav-item nav-link {{ Request::is('services') ? 'active' : '' }}">Services</a>
+            <a href="{{ url('/about') }}" class="nav-item nav-link" {{ Request::is('about') ? 'active' : '' }}>About</a>
+            <a href="{{ url('/contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active' : '' }}">Contact</a>
         </div>
         <div class="navbar-nav">
             @guest

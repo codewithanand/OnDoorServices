@@ -26,10 +26,9 @@
             </div>
         @endif
 
-        <div class="row mb-3">
-            <div class="d-flex align-items-center justify-content-center flex-wrap gap-1 mb-3">
+        <div class="row d-flex align-items-center justify-content-center flex-wrap gap-2 mb-3">
                 @foreach ($services as $item)
-                    <div class="col-md-3 card">
+                    <div class="col-md-2 card">
                         <img src="{{ asset('uploads/service/' . $item->image) }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title" style="height: 50px; overflow-y: hidden;">{{ $item->title }}</h5>
@@ -37,8 +36,7 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-            <div class="d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center mt-3">
                 {{ $services->links() }}
             </div>
         </div>
