@@ -15,15 +15,14 @@ Route::get('/book/{category_slug}/{service_slug}/{freelancer_id}', [App\Http\Con
 Route::get('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'index']);
 Route::post('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'store']);
 
-Route::get('/service/request/freelancer', [App\Http\Controllers\Client\AppointmentController::class, 'freelancer']);
-
-
 // Freelance Routes
 Route::prefix('freelancer')->middleware(['auth'])->group(function () {
     Route::get('/register', [App\Http\Controllers\Freelancer\FreelancerController::class, 'register']);
     Route::post('/register', [App\Http\Controllers\Freelancer\FreelancerController::class, 'store']);
     Route::get('/dashboard', [App\Http\Controllers\Freelancer\FreelancerController::class, 'index']);
     Route::get('/appointment/{appointmentId}/book', [App\Http\Controllers\Freelancer\BookedAppointmentController::class, 'store']);
+    Route::get('/booking/search', [App\Http\Controllers\Freelancer\SearchController::class, 'index']);
+
     Route::get('/booking/{bookingId}/complete', [App\Http\Controllers\Freelancer\BookedAppointmentController::class, 'complete']);
     Route::get('/booking/{bookingId}/revert', [App\Http\Controllers\Freelancer\BookedAppointmentController::class, 'revert']);
 });

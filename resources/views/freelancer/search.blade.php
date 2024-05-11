@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container py-md-5"></div>
-    <div class="container-fluid py-md-5 mb-0 text-dark">
+    <div class="container-fluid py-5 mb-0 text-dark">
         <div class="container-fluid">
 
             @if (session('success'))
@@ -28,86 +28,31 @@
             @endif
 
             <div class="row">
-                <div class="d-md-none d-flex align-items-center justify-content-between mb-3">
-                    <h3 class="h3 text-primary">Dashboard</h3>
-                    <a href="{{url('/freelancer/booking/search')}}" class="btn bg-white border rounded text-muted"><i class="fas fa-search"></i> Search</a>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card card-body">
-                        <img src="{{ asset('uploads/freelancer/' . $freelancer->image) }}" alt=""
-                            class="img-fluid rounded-pill mb-3">
-                        <h3 class="h3 text-primary text-center">{{ $user->name }}</h3>
-                        <p class="lead mb-3 text-center">{{ $user->email }}</p>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="d-none d-md-flex align-items-center justify-content-between">
-                        <h3 class="h3 text-primary">Dashboard</h3>
-                        <a href="{{url('/freelancer/booking/search')}}" class="btn bg-white border rounded text-muted"><i class="fas fa-search"></i> Search</a>
-                    </div>
-                    <hr class="mb-3">
+                
+                <div class="col-md-12">
                     <div class="card card-body mb-3">
                         <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="h4 text-dark mb-3">New Bookings</h3>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Booking Date</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($booked_appointments as $ba)
-                                                <tr>
-                                                    <td>{{ $ba->appointment->name }}</td>
-                                                    <td>{{ $ba->booking_date }}</td>
-                                                    <td><button class="btn btn-info view-btn"
-                                                            data-customer-id="{{ $ba->appointment->id }}"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                                                class="fas fa-eye"></i></button></td>
-                                                    <td><a onclick="return confirm('Are you sure want to cancel the booking?')" href="{{ url('/freelancer/booking/' . $ba->id . '/revert') }}"
-                                                            class="btn btn-danger"><i class="fas fa-history"></i></a></td>
-                                                    <td><a onclick="return confirm('Are you sure want to mark this job complete?')" href="{{ url('/freelancer/booking/' . $ba->id . '/complete') }}"
-                                                            class="btn btn-success"><i class="fas fa-check"></i></a></td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                    <div class="p-3 d-flex justify-content-center align-items-center">
-                                        {{ $booked_appointments->links() }}
-                                    </div>
-                                </div>
+                            <h3 class="h3 text-primary mb-3">Search Appointment</h3>
+                            <div class="col-md-4">
+                                <select name="city" class="form-control" id="cityDropDown">
+
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="category" class="form-control" id="categoryDropDown">
+                                    <option value="0">Select a category</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="service" class="form-control" id="serviceDropDown">
+                                    <option value="0">Select a service</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="card card-body">
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-md-12">
-                                <h3 class="h4 text-dark mb-3">Completed Jobs</h3>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Booking Date</th>
-                                                <th>Completed Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($completed_appointments as $ba)
-                                            <tr>
-                                                <td>{{ $ba->appointment->name }}</td>
-                                                <td>{{ $ba->booking_date }}</td>
-                                                <td>{{ $ba->completed_date }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                <div id="customerDataTable">
+
                                 </div>
                             </div>
                         </div>
@@ -191,11 +136,68 @@
     <script src="{{ asset('client/js/select2.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('.view-btn').each(function() {
-                $(this).click(function() {
-                    populateAppointmentDetails($(this).data('customer-id'));
+            $("#cityDropDown").change(function() {
+                $.ajax({
+                    url: "http://localhost:8000/api/appointments/city/" + $(this).val(),
+                    dataType: 'json',
+                    success: function(data) {
+                        populateCustomerDataTable(data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error("Error:", textStatus, errorThrown);
+                    }
                 });
             });
+
+            $("#categoryDropDown").select2();
+            $("#serviceDropDown").select2();
+
+            $("#cityDropDown").select2({
+                placeholder: "Select a city",
+                ajax: {
+                    url: "http://localhost:8000/api/city",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            cityName: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    id: item.city_code,
+                                    text: item.city_name
+                                };
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+            function populateCustomerDataTable(data) {
+                $('#customerDataTable').html('');
+                $.each(data, function() {
+                    $('#customerDataTable').append(`
+                        <div class="d-flex align-items-center justify-content-between border p-3 mb-3">
+                            <span>${this.name}</span>
+                            <span>${this.mobile}</span>
+                            <span>${this.service.title}</span>
+                            <div>
+                                <button type="button" class="btn btn-info view-btn" data-customer-id="${this.id}" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i> View</button>
+                                <a href="{{ url('/freelancer/appointment/${this.id}/book') }}" class="btn btn-success"><i class="fas fa-check"></i> Book</a>
+                            </div>
+                        </div>
+                    `);
+                });
+                $('.view-btn').each(function() {
+                    $(this).click(function() {
+                        populateAppointmentDetails($(this).data('customer-id'));
+                    });
+                });
+            }
 
             function populateAppointmentDetails(appointmentId) {
                 $('#modalCustomerName').text('');

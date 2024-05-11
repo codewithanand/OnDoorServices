@@ -4,22 +4,26 @@ namespace App\Http\Controllers\Freelancer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
+use App\Models\User;
 use App\Models\Appointment;
 use App\Models\BookedAppointment;
 
 class BookedAppointmentController extends Controller
 {
     public function store($appointmentId){
+        $user = User::with('freelancer')->find(auth()->user()->id);
+        $bookedAppointment = new BookedAppointment;
+        $bookedAppointment->appointment_id = $appointmentId;
+        $bookedAppointment->freelancer_id = $user->freelancer->id;
+        $bookedAppointment->booking_date = date("Y-m-d");
+        $bookedAppointment->save();
+
         $appointment = Appointment::find($appointmentId);
         $appointment->booked = 1;
         $appointment->update();
 
-        $bookedAppointment = new BookedAppointment;
-        $bookedAppointment->appointment_id = $appointmentId;
-        $bookedAppointment->freelancer_id = auth()->user()->id;
-        $bookedAppointment->booking_date = date("Y-m-d");
-        $bookedAppointment->save();
 
         return redirect()->back()->with("success", "Appointment booked successfully");
     }
@@ -50,7 +54,7 @@ class BookedAppointmentController extends Controller
 
 
             $booked_appointment->delete();
-            return redirect()->back()->with("success", "Job restored successfully");
+            return redirect()->back()->with("success", "Booking cancelled successfully");
         }
         else{
             return redirect()->back()->with("error", "Incorrect booking id");

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use App\Models\ServicePartner;
+use App\Models\Freelancer;
 
 class User extends Authenticatable
 {
@@ -48,7 +48,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function service_partner(){
-        return $this->hasMany(ServicePartner::class, 'user_id', 'id');
+    public function freelancer(){
+        return $this->belongsTo(Freelancer::class, 'id', 'user_id');
     }
 }
