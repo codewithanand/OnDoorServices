@@ -21,7 +21,7 @@ class FreelancerController extends Controller
         $freelancer = Freelancer::where('user_id', auth()->user()->id)->first();
         if($freelancer){
             $cities = City::all();
-            $booked_appointments = BookedAppointment::where('freelancer_id', auth()->user()->id)->orderBy('status')->simplePaginate(5);
+            $booked_appointments = BookedAppointment::where('freelancer_id', $freelancer->id)->orderBy('status')->simplePaginate(5);
             return view ("freelancer.dashboard", compact("cities", "freelancer", "user", 'booked_appointments'));
         }
         else{

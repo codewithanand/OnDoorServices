@@ -16,7 +16,7 @@ class CallRequestController extends Controller
 
     public function getCallRequestById(Request $request){
         $appointmentId = $request->id;
-        $callRequests = Appointment::where('id', $appointmentId)->with('service')->first();
+        $callRequests = Appointment::where('id', $appointmentId)->with('service')->with('state')->with('district')->with('city')->with('village')->first();
         return response()->json($callRequests);
     }
 }

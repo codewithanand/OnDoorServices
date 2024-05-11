@@ -10,6 +10,7 @@ Route::get('/contact', [App\Http\Controllers\Client\HomeController::class, 'cont
 Route::get('/category/{slug}', [App\Http\Controllers\Client\CategoryController::class, 'index']);
 Route::get('/services', [App\Http\Controllers\Client\ServiceController::class, 'index']);
 Route::get('/services/{category_slug}/{service_slug}', [App\Http\Controllers\Client\ServiceController::class, 'services']);
+Route::get('/book/{category_slug}/{service_slug}/{freelancer_id}', [App\Http\Controllers\Client\ServiceController::class, 'book']);
 
 Route::get('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'index']);
 Route::post('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'store']);

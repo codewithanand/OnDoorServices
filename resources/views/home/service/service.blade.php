@@ -45,8 +45,9 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Contact</th>
-                                        <th>Stars</th>
+                                        <th>Company</th>
+                                        <th>Rating</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,7 +55,13 @@
                                         @foreach ($freelancer_services->freelancers as $freelancer)
                                             <tr>
                                                 <td>{{$freelancer->name}}</td>
-                                                <td>{{$freelancer->mobile}}</td>
+                                                <td>
+                                                    @if ($freelancer->company)
+                                                        {{$freelancer->company}}
+                                                    @else
+                                                        <span class="badge bg-info">Freelancer</span>
+                                                    @endif    
+                                                </td>
                                                 <td>
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @if ($i <= $freelancer->reviews->stars)
@@ -64,7 +71,9 @@
                                                         @endif
                                                     @endfor
                                                 </td>
-                                                
+                                                <td>
+                                                    <a href="{{url('/book/'.$category->slug.'/'.$service->slug.'/'.Crypt::encryptString($freelancer->id))}}" class="btn btn-dark">Book</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif

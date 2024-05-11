@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BookedAppointment;
 use Illuminate\Http\Request;
 
 use App\Models\Appointment;
@@ -30,8 +31,16 @@ class AppointmentController extends Controller
             $appointment->city_code = $request->city_code;
             $appointment->village_code = $request->village_code;
             $appointment->address = $request->address;
+            $appointment->booked = 1;
             $appointment->save();
-            return redirect()->back()->with("success", "Your service request is submitted. Hang on, we will call you back soon!");
+
+            $booked_appointment = new BookedAppointment;
+            $booked_appointment->freelancer_id = $request->freelancer_id;
+            $booked_appointment->appointment_id = $appointment->id;
+            $booked_appointment->booking_date = date("Y-m-d");
+            $booked_appointment->save();
+
+            return redirect()->back()->with("success", "Your request is submitted. Hang on, our agent will call you soon!");
         }
         catch(error){
             return redirect()->back()->with("error", "Something went wrong! Please come back later.");
