@@ -6,6 +6,10 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\Client\HomeController::class, 'index']);
 Route::get('/about', [App\Http\Controllers\Client\HomeController::class, 'about']);
 Route::get('/contact', [App\Http\Controllers\Client\HomeController::class, 'contact']);
+Route::get('/help', [App\Http\Controllers\Client\HomeController::class, 'help']);
+Route::get('/faqs', [App\Http\Controllers\Client\HomeController::class, 'faq']);
+Route::get('/terms-and-condition', [App\Http\Controllers\Client\HomeController::class, 'terms']);
+Route::get('/privacy', [App\Http\Controllers\Client\HomeController::class, 'privacy']);
 
 Route::get('/category/{slug}', [App\Http\Controllers\Client\CategoryController::class, 'index']);
 Route::get('/services', [App\Http\Controllers\Client\ServiceController::class, 'index']);

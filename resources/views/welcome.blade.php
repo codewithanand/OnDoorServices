@@ -1,7 +1,6 @@
 @extends('layouts.client.master')
 
 @section('styles')
-    
 @endsection
 
 @section('hero')
@@ -9,18 +8,16 @@
         <div class="container-fluid px-lg-5">
             <div class="row g-5 align-items-end">
                 <div class="col-lg-6 text-center text-lg-start">
-                    <h1 class="text-white mb-4 animated slideInDown">DoorIn Services Provide Of Inteligents solution &
-                        Fullfill the needs.
+                    <h1 class="text-white mb-4 animated slideInDown">
+                        Home for Freelancers and Job Seekers
                     </h1>
-                    <p class="text-white pb-3 animated slideInDown">Tempor rebum no at dolore lorem clita rebum
-                        rebum
-                        ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit
-                        justo
-                        amet ipsum vero ipsum clita lorem</p>
+                    <p class="text-white pb-3 animated slideInDown">JharNirbhar provides Inteligents solutions &
+                        Fullfill the needs.</p>
                     <a href="{{ url('/register') }}"
                         class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started
                     </a>
-                    <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact
+                    <a href="{{ url('/contact') }}"
+                        class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact
                         Us</a>
                 </div>
                 <div class="col-lg-6 text-center text-lg-start">
@@ -50,10 +47,10 @@
             <p class="section-title text-secondary justify-content-center mb-5"><span></span>Categories<span></span></p>
             <div class="owl-carousel p-3">
                 @foreach ($categories as $category)
-                    <a class="category-container p-3 mx-2 my-3" href="{{url('/category/'.$category->slug)}}">
-                        <img src="{{asset('uploads/category/'.$category->image)}}" />
+                    <a class="category-container p-3 mx-2 my-3" href="{{ url('/category/' . $category->slug) }}">
+                        <img src="{{ asset('uploads/category/' . $category->image) }}" />
                         <h3>
-                            {{$category->title}}
+                            {{ $category->title }}
                         </h3>
                     </a>
                 @endforeach
@@ -68,13 +65,15 @@
                 <div class="col-lg-7 text-center">
                     <p class="section-title text-white justify-content-center"><span></span>Newsletter<span></span></p>
                     <h1 class="text-center text-white mb-4">Stay Always In Touch</h1>
-                    <p class="text-white mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                        Clita erat ipsum et lorem et sit sed stet lorem sit clita duo justo</p>
+                    <p class="text-white mb-4">Enter email to recieve daily news and updates.</p>
                     <div class="position-relative w-100 mt-3">
-                        <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text"
-                            placeholder="Enter Your Email" style="height: 48px;">
-                        <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i
-                                class="fa fa-paper-plane text-primary fs-4"></i></button>
+                        <form action="{{ url('/newsletter/subscribe') }}" method="post">
+                            @csrf
+                            <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text"
+                                placeholder="Enter Your Email" name="email" style="height: 48px;">
+                            <button type="submit" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i
+                                    class="fa fa-paper-plane text-primary fs-4"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>

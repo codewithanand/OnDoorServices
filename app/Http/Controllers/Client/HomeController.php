@@ -15,10 +15,26 @@ class HomeController extends Controller
     }
 
     public function about(){
-        return view ("home.about.index");
+        return view ("home.about");
     }
 
     public function contact(){
-        return view ("home.contact.index");
+        return view ("home.contact");
+    }
+
+    public function faq(){
+        return view ("home.faq");
+    }
+
+    public function help(){
+        return view ("home.help");
+    }
+
+    public function privacy(){
+        return view ("home.privacy");
+    }
+
+    public function terms(){
+        return view ("home.terms");
     }
 }

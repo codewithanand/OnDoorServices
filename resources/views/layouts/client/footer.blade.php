@@ -6,7 +6,7 @@
                  <p class="section-title text-white h5 mb-4">Address<span></span></p>
                  <p><i class="fa fa-map-marker-alt me-3"></i>RANCHI, JHARKHAND, INDIA</p>
                  <p><i class="fa fa-phone-alt me-3"></i>+91 9128227890</p>
-                 <p><i class="fa fa-envelope me-3"></i>serviceondoor@example.com</p>
+                 <p><i class="fa fa-envelope me-3"></i>mail@jharnirbhar.in</p>
                  <div class="d-flex pt-2">
                      <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                      <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -27,7 +27,7 @@
                     <form action="{{url('/newsletter/subscribe')}}" method="post">
                     @csrf
                         <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text"
-                            placeholder="Your Email" style="height: 48px;">
+                            placeholder="Your Email" name="email" style="height: 48px;">
                         <button type="submit" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i
                                 class="fa fa-paper-plane text-primary fs-4"></i></button>
                     </form>
@@ -44,7 +44,6 @@
                  <div class="col-md-6 text-center text-md-end">
                      <div class="footer-menu">
                          <a href="{{url('/')}}">Home</a>
-                         <a href="{{url('/cookies')}}">Cookies</a>
                          <a href="{{url('/help')}}">Help</a>
                          <a href="{{url('/faqs')}}">FAQs</a>
                      </div>
