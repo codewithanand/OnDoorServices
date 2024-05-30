@@ -35,7 +35,7 @@ class AppointmentController extends Controller
             $appointment->save();
 
             $booked_appointment = new BookedAppointment;
-            $booked_appointment->freelancer_id = $request->freelancer_id;
+            $booked_appointment->freelancer_id = '0';
             $booked_appointment->appointment_id = $appointment->id;
             $booked_appointment->booking_date = date("Y-m-d");
             $booked_appointment->save();

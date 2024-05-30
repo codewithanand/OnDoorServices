@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{ url('/service/request/call') }}" method="post">
+                <form action="{{ url('/freelancer/request/call') }}" method="post">
                     @csrf
                     <input type="hidden" name="freelancer_id" value="{{$freelancer->id}}">
                     <div class="row">

@@ -15,9 +15,11 @@ Route::get('/category/{slug}', [App\Http\Controllers\Client\CategoryController::
 Route::get('/services', [App\Http\Controllers\Client\ServiceController::class, 'index']);
 Route::get('/services/{category_slug}/{service_slug}', [App\Http\Controllers\Client\ServiceController::class, 'services']);
 Route::get('/book/{category_slug}/{service_slug}/{freelancer_id}', [App\Http\Controllers\Client\ServiceController::class, 'book']);
+Route::post('/freelancer/request/call', [App\Http\Controllers\Client\ServiceController::class, 'store']);
 
 Route::get('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'index']);
 Route::post('/service/request/call', [App\Http\Controllers\Client\AppointmentController::class, 'store']);
+
 
 // Freelance Routes
 Route::prefix('freelancer')->middleware(['auth'])->group(function () {
